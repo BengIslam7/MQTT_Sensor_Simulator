@@ -22,7 +22,7 @@ IPV4_ROUTE_1="192.168.1.1/24"    # Default route or gateway to reach external ne
 Then, set up the TAP interface using the provided script:
 
 ```bash
-$ ./tools/net-tools/net-setup.sh start
+./tools/net-tools/net-setup.sh start
 ```
 
 This script creates and configures the zeth TAP device on the host.
