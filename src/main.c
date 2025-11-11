@@ -39,7 +39,6 @@ void mqtt_evt_handler(struct mqtt_client *client, const struct mqtt_evt *evt)
         default:
             break;
     }
-
 }
 
 int main(void)
@@ -98,8 +97,8 @@ int main(void)
         uint32_t rand_humi = sys_rand32_get();
 
         // Convert to realistic float ranges
-        float temperature = 20.0f + (rand_temp % 1500) / 100.0f;  // 20.0–35.0 °C
-        float humidity    = 30.0f + (rand_humi % 7000) / 100.0f;  // 30.0–100.0 %
+        double temperature = 20.0f + (rand_temp % 1500) / 100.0f;  // 20.0–35.0 °C
+        double humidity    = 30.0f + (rand_humi % 7000) / 100.0f;  // 30.0–100.0 %
 
         // Prepare and publish MQTT message
         int len = snprintf(tx_buffer, sizeof(tx_buffer),
