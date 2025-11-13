@@ -1,4 +1,4 @@
-# Zephyr MQTT Sensor Simulator
+# Zephyr MQTT Simulator
 
 Zephyr MQTT client that publishes simulated sensor data to the MQTT broker and subscribes to the topic "rtest" to receive messages from the broker.
 It runs on the **native_sim** board, allowing you to test Zephyr applications directly on your host PC (Linux, macOS, or Windows) without hardware.
