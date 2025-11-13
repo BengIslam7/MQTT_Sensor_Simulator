@@ -62,6 +62,7 @@ int main(void)
 {
     int rc;
     struct zsock_pollfd fds[1];
+    static uint8_t mqtt_payload[128];
 
     printk("Starting Zephyr MQTT Sensor Simulator on %s\n", CONFIG_BOARD);
 
@@ -146,17 +147,17 @@ int main(void)
         double humidity    = 30.0f + (rand_humi % 7000) / 100.0f;  // 30.0–100.0 %
 
         // Prepare and publish MQTT message
-        int len = snprintf(tx_buffer, sizeof(tx_buffer),
+        int len = snprintf((char *)mqtt_payload,sizeof(mqtt_payload),
                            "Temperature: %.2f°C, Humidity: %.2f%%", temperature, humidity);
 
         // Log the sensor data
-        printk("[SENSOR] %s\n", tx_buffer);
+        printk("[SENSOR] %s\n", mqtt_payload);
 
         struct mqtt_publish_param param = {
-            .message.topic.qos = MQTT_QOS_2_EXACTLY_ONCE,
+            .message.topic.qos = MQTT_QOS_1_AT_LEAST_ONCE,
             .message.topic.topic.utf8 = (uint8_t *)"sensors/temperature_humidity",
             .message.topic.topic.size = strlen("sensors/temperature_humidity"),
-            .message.payload.data = tx_buffer,
+            .message.payload.data = mqtt_payload,
             .message.payload.len = len,
             .message_id = sys_rand32_get(),
             .dup_flag = 0,

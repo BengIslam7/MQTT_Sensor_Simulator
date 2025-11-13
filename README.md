@@ -1,6 +1,6 @@
 # Zephyr MQTT Sensor Simulator
 
-This project demonstrates a Zephyr application that simulates temperature and humidity sensor readings and publishes them to an MQTT broker.  
+Zephyr MQTT client that publishes simulated sensor data to the MQTT broker and subscribes to the topic "rtest" to receive messages from the broker.
 It runs on the **native_sim** board, allowing you to test Zephyr applications directly on your host PC (Linux, macOS, or Windows) without hardware.
 
 ---
@@ -123,9 +123,35 @@ If you are using Linux, the output will appear in your terminal, for example:
 Starting Zephyr MQTT Sensor Simulator on native_sim
 [00:00:00.120,000] <inf> net_mqtt: Connect completed
 [MQTT] Connected to broker!
+[MQTT] Subscribe request sent, message_id=5712
 [SENSOR] Temperature: 34.50°C, Humidity: 37.44%
 [MQTT] Publish successful
+[MQTT] Received topic: rtest
+[MQTT] Message: Hello from loop 20:12:24
 ```
+
+---
+
+## 🧩 MQTT Test Commands
+
+You can monitor MQTT traffic and simulate data using Mosquitto:
+
+**Subscribe to sensors/temperature_humidity topic:**
+
+```bash
+mosquitto_sub -h localhost -t sensors/temperature_humidity
+```
+
+**Continuously publish test messages:**
+
+```bash
+while true; do
+  mosquitto_pub -h 192.168.1.100 -t rtest -m "Hello from loop $(date +%T)"
+  sleep 1
+done
+```
+
+This loop publishes a message every second to the topic rtest, allowing you to see live MQTT communication between your Zephyr application and the broker.
 
 ---
 
