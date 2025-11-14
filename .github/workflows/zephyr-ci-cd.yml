@@ -124,10 +124,11 @@ jobs:
 
           # Run the Zephyr test while publisher is active
           chmod +x zephyr.exe
-          ./zephyr.exe -testargs --tcm-output=xml || true
+          ./zephyr.exe -stop_at=10 -testargs --tcm-output=xml || true
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: test_results_native_sim
-          path: test_results.xml
+          path: build/zephyr/tc_output.xml
+
