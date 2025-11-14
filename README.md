@@ -1,6 +1,8 @@
 # Zephyr MQTT Simulator
 
-Zephyr MQTT client that publishes simulated sensor data to the MQTT broker and subscribes to the topic "rtest" to receive messages from the broker.
+This project builds a virtual IoT networking environment using Zephyr RTOS native_sim and the Zeth virtual Ethernet driver, allowing a fully simulated Zephyr device 
+to communicate over a TAP interface with a Mosquitto MQTT broker running on the Linux host.
+The Zephyr application includes an MQTT client that publishes simulated sensor data to the broker and subscribes to the "rtest" topic to receive messages from the host.
 It runs on the **native_sim** board, allowing you to test Zephyr applications directly on your host PC (Linux, macOS, or Windows) without hardware.
 
 ---
